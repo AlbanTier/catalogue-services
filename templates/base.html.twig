@@ -6,13 +6,38 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
         {% endblock %}
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
+    <navbar>
+        {% block navbar%}
+            <nav class="container flex justify-around py-5 mx-auto bg-white mb-5">
+                <div class="flex items-center">
+                    <h3 class="text-2xl font-medium text-blue-500">COLABO</h3>
+                </div>
+                <!-- left header section -->
+                <div class="items-center space-x-10 lg:flex">
+                    <a href="{{ path('app_tabs') }}">Accueil</a>
+                    <a href="{{ path('app_new_tabs') }}">Nouveau tableau</a>
+                    <a href="{{ path('app_new_tabs') }}">Exemple</a>
+                    <a href="{{ path('app_new_tabs') }}">Manuel</a>
+                </div>
+                <!-- right header section -->
+                <div class="flex items-center space-x-2">
+                    <button class="px-4 py-2 text-blue-100 bg-blue-800 rounded-md">
+                        Connexion
+                    </button>
+                    <button class="px-4 py-2 text-gray-200 bg-gray-400 rounded-md">
+                        Inscription
+                    </button>
+                </div>
+            </nav>
+        {% endblock %}
+    </navbar>
     <body>
         {% block body %}{% endblock %}
     </body>

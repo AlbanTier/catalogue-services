@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Création tableau | Colabo{% endblock %}
+{% block body %}
+<body>
+<div class="flex items-center">
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<input type="submit" value="Envoyer">
+{{ form_end(form) }}
+</div>
+
+
+</body>
+{% endblock %}
