@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block title %}Création tableau | Colabo{% endblock %}
+{% block body %}
+    <body>
+    {% if prod|length == 0 %}
+    <p class="bg-indigo-600 rounded-3xl text-center p-3 mb-5">Il n'y as aucune ligne dans votre tableau n'hésitez pas à en rajouter en cliquant <a class="text-indigo-500" href="">juste ici</a>.</p>
+        <div class="ml-5 underline space-x-1">
+            <button onclick="location.href='/addProduit/{{ tabs.id }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Ajouter ligne
+            </button>
+        </div>
+    {% else %}
+    <button onclick="location.href='/addProduit/{{ tabs.id }}'" class="mt-5 ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Ajouter ligne
+    </button>
+
+    <div class="ml-5 space-x-1">
+    <div class="container flex justify-center mx-auto">
+        <div class="flex flex-col">
+            <div class="w-full">
+                <div class="border-b border-gray-200 shadow">
+                    <table class="divide-y divide-gray-300 ">
+                        <thead class="bg-gray-100 underline">
+                        <tr>
+                            <th class="px-10 py-2 text-xs text-gray-500">
+                                Désignation
+                            </th>
+                            <th class="border-l px-10 py-2 text-xs text-gray-500">
+                                Marque
+                            </th>
+                            <th class="border-l px-10 py-2 text-xs text-gray-500">
+                                Reference
+                            </th>
+                            <th class="border-l px-6 py-2 text-xs text-gray-500">
+                                Modifier
+                            </th>
+                            <th class="px-6 py-2 text-xs text-gray-500">
+                                Supprimer
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-300">
+                        {% for produit in prod %}
+                        <tr class="whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                {{ produit.designation }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    {{ produit.marque }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-500">{{ produit.reference }}</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="#" class="px-4 py-1 text-sm text-blue-600 bg-blue-200 rounded-full">📝</a>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="/deleteProduit/{{ tabs.id }}/{{ produit.id }}" class="px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">🗑️</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    </body>
+{% endblock %}
