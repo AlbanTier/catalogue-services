@@ -37,6 +37,21 @@ class Produit
      */
     private $idTabs;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $prixTTC;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantite;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $garantie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +101,42 @@ class Produit
     public function setIdTabs(int $idTabs): self
     {
         $this->idTabs = $idTabs;
+
+        return $this;
+    }
+
+    public function getPrixTTC(): ?float
+    {
+        return $this->prixTTC;
+    }
+
+    public function setPrixTTC(?float $prixTTC): self
+    {
+        $this->prixTTC = $prixTTC;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getGarantie(): ?bool
+    {
+        return $this->garantie;
+    }
+
+    public function setGarantie(?bool $garantie): self
+    {
+        $this->garantie = $garantie;
 
         return $this;
     }

@@ -35,6 +35,9 @@ class ProduitController extends AbstractController
             ->add('designation', null)
             ->add('marque', null)
             ->add('reference', null)
+            ->add('quantite', null)
+            ->add('garantie', null)
+            ->add('prixTTC', null)
             ->getForm();
         ;
 
@@ -48,7 +51,7 @@ class ProduitController extends AbstractController
             $produit = $repo->findAll();
         }
 
-        return $this->render('tabs/create.html.twig', ['form' => $form->createView()]);
+        return $this->render('produit/form.produit.html.twig', ['form' => $form->createView()]);
     }
     /**
      * @Route ("/deleteProduit/{idTabs}/{id}", name="app_delete_produit")

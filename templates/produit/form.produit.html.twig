@@ -2,6 +2,37 @@
 {% block title %}Création tableau | Colabo{% endblock %}
 {% block body %}
     <body>
-    {{ tabs.id }}
+    <div class="flex justify-center items-center w-full bg-blue-400 shadow-lg">
+        <div class="w-min bg-white rounded shadow-2xl p-5 m-4 flex justify-center">
+            {{ form_start(form) }}
+                    {{ form_row(form.designation, {
+                        label_class: 'mb-2 font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    })
+                    }}{{ form_row(form.marque, {
+                        label_class: 'mb-2 font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    })
+                    }}{{ form_row(form.reference, {
+                        label_class: 'mb-2 font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    })
+                    }}{{ form_row(form.quantite, {
+                        label_class: 'mb-2 font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    })
+                    }}{{ form_row(form.garantie, {
+                        label_class: 'mb-3  font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 justify-between flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    })
+                    }}{{ form_row(form.prixTTC, {
+                        label_class: 'mb-2 font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    })
+                    }}
+                <input type="submit" value="Envoyer">
+            {{ form_end(form) }}
+        </div>
+    </div>
     </body>
 {% endblock %}

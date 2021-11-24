@@ -15,23 +15,23 @@
     </head>
     <navbar>
         {% block navbar%}
-            <nav class="container flex justify-around py-5 mx-auto bg-white mb-5">
+            <nav class="container flex justify-around py-5 mx-auto bg-white mb-5 shadow-lg rounded-b-3xl">
                 <div class="flex items-center">
-                    <h3 class="text-2xl font-medium text-blue-500">COLABO</h3>
+                    <a href="{{ path('app_tabs') }}" class="text-2xl font-medium text-blue-500 hover:text-blue-900">COLABO</a>
                 </div>
                 <!-- left header section -->
-                <div class="items-center space-x-10 lg:flex">
-                    <a href="{{ path('app_tabs') }}">Accueil</a>
-                    <a href="{{ path('app_new_tabs') }}">Nouveau tableau</a>
-                    <a href="{{ path('app_new_tabs') }}">Exemple</a>
-                    <a href="{{ path('app_new_tabs') }}">Manuel</a>
+                <div class="items-center space-x-10 lg:flex ">
+                    <a class="hover:text-blue-500" href="{{ path('app_tabs') }}">Accueil</a>
+                    <a class="hover:text-blue-500" href="{{ path('app_new_tabs') }}">Nouveau tableau</a>
+                    <a class="hover:text-blue-500" href="#">Exemple</a>
+                    <a class="hover:text-blue-500" href="#">Manuel</a>
                 </div>
                 <!-- right header section -->
                 <div class="flex items-center space-x-2">
-                    <button class="px-4 py-2 text-blue-100 bg-blue-800 rounded-md">
+                    <button class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 rounded-md">
                         Connexion
                     </button>
-                    <button class="px-4 py-2 text-gray-200 bg-gray-400 rounded-md">
+                    <button class="px-4 py-2 text-gray-200 bg-gray-400 hover:bg-green-700 hover:text-white rounded-md">
                         Inscription
                     </button>
                 </div>
