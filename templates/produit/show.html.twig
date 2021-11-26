@@ -16,13 +16,14 @@
     <button onclick="location.href='/addProduit/{{ tabs.id }}'" class="mt-5 ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Ajouter ligne</button>
 
     <div class="ml-5 space-x-1">
-    <div class="container flex justify-center mx-auto">
+    <div class="container flex flex-wrap justify-center mx-auto">
         <div class="flex flex-col">
             <div class="w-full">
                 <div class="border-b border-gray-200 shadow">
                     <table class="divide-y divide-gray-300 ">
                         <thead class="bg-gray-100 underline">
                         <tr>
+                            {# Donnée #}
                             <th class="px-10 py-2 text-xs text-gray-500">
                                 Désignation
                             </th>
@@ -41,6 +42,22 @@
                             <th class="border-l px-10 py-2 text-xs text-gray-500">
                                 PrixTTC
                             </th>
+                            <th class="border-l px-10 py-2 text-xs text-gray-500">
+                                Type de garantie
+                            </th>
+                            <th class="border-l px-10 py-2 text-xs text-gray-500">
+                                Numéro immo
+                            </th>
+                            <th class="border-l px-10 py-2 text-xs text-gray-500 flex-nowrap">
+                                Caratéristiques
+                            </th>
+                            <th class="border-l px-10 py-2 text-xs text-gray-500">
+                                Pack
+                            </th>
+                            <th class="border-l px-10 py-2 text-xs text-gray-500">
+                                Commentaire
+                            </th>
+                            {# Edition/suppression #}
                             <th class="border-l px-6 py-2 text-xs text-gray-500">
                                 Modifier
                             </th>
@@ -74,6 +91,25 @@
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-900">
                                 {{ produit.prixTTC }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">
+                                {{ produit.typeGarantie }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">
+                                {{ produit.numImmo }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">
+                                {{ produit.caracteristique }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">
+                                {% if produit.pack == true %}
+                                    <p>✔</p>
+                                {% else %}
+                                    <p>❌</p>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">
+                                {{ produit.commentaire }}
                             </td>
                             <td class="px-6 py-4">
                                 <a href="#" class="px-4 py-1 text-sm text-blue-600 bg-blue-200 rounded-full">📝</a>

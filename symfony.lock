@@ -88,6 +88,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "jms/metadata": {
+        "version": "2.6.1"
+    },
     "laminas/laminas-code": {
         "version": "4.4.3"
     },
@@ -588,6 +591,12 @@
     },
     "twig/twig": {
         "version": "v3.3.3"
+    },
+    "vich/uploader-bundle": {
+        "version": "1.18",
+        "recipe": {
+            "version": "1.7"
+        }
     },
     "webmozart/assert": {
         "version": "1.10.0"

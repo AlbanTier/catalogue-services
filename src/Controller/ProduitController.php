@@ -38,6 +38,12 @@ class ProduitController extends AbstractController
             ->add('quantite', null)
             ->add('garantie', null)
             ->add('prixTTC', null)
+            ->add('numImmo', null)
+            ->add('typeGarantie', null)
+            ->add('commentaire', null)
+            ->add('caracteristique', null)
+            ->add('pack', null)
+
             ->getForm();
         ;
 

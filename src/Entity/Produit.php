@@ -52,6 +52,42 @@ class Produit
      */
     private $garantie;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numImmo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $typeGarantie;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $commentaire;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pieceJointe;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $caracteristique;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $pack;
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,4 +176,89 @@ class Produit
 
         return $this;
     }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getNumImmo(): ?int
+    {
+        return $this->numImmo;
+    }
+
+    public function setNumImmo(int $numImmo): self
+    {
+        $this->numImmo = $numImmo;
+
+        return $this;
+    }
+
+    public function getTypeGarantie(): ?string
+    {
+        return $this->typeGarantie;
+    }
+
+    public function setTypeGarantie(?string $typeGarantie): self
+    {
+        $this->typeGarantie = $typeGarantie;
+
+        return $this;
+    }
+
+    public function getCommentaire(): ?string
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(?string $commentaire): self
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    public function getPieceJointe(): ?string
+    {
+        return $this->pieceJointe;
+    }
+
+    public function setPieceJointe(?string $pieceJointe): self
+    {
+        $this->pieceJointe = $pieceJointe;
+
+        return $this;
+    }
+
+    public function getCaracteristique(): ?string
+    {
+        return $this->caracteristique;
+    }
+
+    public function setCaracteristique(?string $caracteristique): self
+    {
+        $this->caracteristique = $caracteristique;
+
+        return $this;
+    }
+
+    public function getPack(): ?bool
+    {
+        return $this->pack;
+    }
+
+    public function setPack(?bool $pack): self
+    {
+        $this->pack = $pack;
+
+        return $this;
+    }
+
 }

@@ -28,10 +28,12 @@ class TabsController extends AbstractController
      */
     public function show(Tabs $tabs, EntityManagerInterface $em, Request $request): Response
     {
+        //récupération de l'id contenu dans "_route_params"
         $id =  $request->get('_route_params');
         foreach( $id as $value )
             $idR = $value;
         $repoProduit = $em->getRepository('App\Entity\Produit');
+        //recherche de tout les produit ayant comme iD le tableau recherché
         $prod = $repoProduit->findby(array('idTabs' => $idR));
         return $this->render('produit/show.html.twig',compact('tabs', 'prod'));
     }
@@ -48,9 +50,10 @@ class TabsController extends AbstractController
             ->add('description', null)
             ->getForm()
             ;
-
+        //Récupération des saisie
         $form->handleRequest($request);
 
+        //Si le form est envoyé et valide alors on envoie en base de donnée et on affiche la vue des tableau
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($tabs);
             $em->flush();
@@ -58,7 +61,7 @@ class TabsController extends AbstractController
             $tabs = $repo->findAll();
             return $this->render('tabs/index.html.twig', ['tabs' => $tabs]);
         }
-
+        //Sinon on renvoie à la création du formulaire
         return $this->render('tabs/create.html.twig', ['form' => $form->createView()]);
     }
 
