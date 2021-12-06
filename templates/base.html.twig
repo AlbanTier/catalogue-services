@@ -1,44 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        {% endblock %}
+    {% block stylesheets %}
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <navbar>
-        {% block navbar%}
-            <nav class="container flex justify-around py-5 mx-auto bg-white mb-5 shadow-lg rounded-b-3xl">
-                <div class="flex items-center">
-                    <a href="{{ path('app_tabs') }}" class="text-2xl font-medium text-blue-500 hover:text-blue-900">COLABO</a>
-                </div>
-                <!-- left header section -->
-                <div class="items-center space-x-10 lg:flex ">
-                    <a class="hover:text-blue-500" href="{{ path('app_tabs') }}">Accueil</a>
-                    <a class="hover:text-blue-500" href="{{ path('app_new_tabs') }}">Nouveau tableau</a>
-                    <a class="hover:text-blue-500" href="#">Exemple</a>
-                    <a class="hover:text-blue-500" href="#">Manuel</a>
-                </div>
-                <!-- right header section -->
-                <div class="flex items-center space-x-2">
-                    <button class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 rounded-md">
+
+    {% endblock %}
+
+    {% block javascripts %}
+        {# {{ encore_entry_script_tags('app') }} #}
+
+    {% endblock %}
+</head>
+<navbar>
+    {% block navbar %}
+        <nav class="container flex justify-around py-5 mx-auto bg-white mb-5 shadow-lg rounded-b-3xl sticky top-0">
+            <div class="flex items-center">
+                <a href="{{ path('app_tabs') }}"
+                   class="text-2xl font-medium text-blue-500 hover:text-blue-900">COLABORATION</a>
+            </div>
+            <!-- left header section -->
+            <div class="items-center space-x-10 lg:flex ">
+                <a class="hover:text-blue-500" href="{{ path('app_tabs') }}">Accueil</a>
+                <a class="hover:text-blue-500" href="{{ path('app_new_tabs') }}">Nouveau tableau</a>
+                <a class="hover:text-blue-500" href="#">Exemple</a>
+                <a class="hover:text-blue-500" href="#">Manuel</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="hover:text-blue-500" href="#">Admin</a>
+                {% endif %}
+            </div>
+            <!-- right header section -->
+            <div class="flex items-center space-x-2">
+                {% if app.user %}
+                    <button onclick="location.href='/login'"
+                            class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 rounded-md">
+                        {{ app.user.username }}
+                    </button>
+                {% else %}
+                    <button onclick="location.href='/login'"
+                            class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 rounded-md">
                         Connexion
                     </button>
-                    <button class="px-4 py-2 text-gray-200 bg-gray-400 hover:bg-green-700 hover:text-white rounded-md">
+                {% endif %}
+                {% if app.user %}
+                    <button onclick="location.href='/logout'"
+                            class="px-4 py-2 text-gray-200 bg-gray-400 hover:bg-red-700 hover:text-white rounded-md">
+                        Se déconnecter
+                    </button>
+                {% else %}
+                    <button onclick="location.href='/register'"
+                            class="px-4 py-2 text-gray-200 bg-gray-400 hover:bg-green-700 hover:text-white rounded-md">
                         Inscription
                     </button>
-                </div>
-            </nav>
-        {% endblock %}
-    </navbar>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+                {% endif %}
+
+            </div>
+        </nav>
+    {% endblock %}
+</navbar>
+<body>
+{% block body %}{% endblock %}
+</body>
 </html>

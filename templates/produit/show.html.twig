@@ -4,70 +4,85 @@
     <body>
 
     {# Si il n'y as pas de ligne dans le tableau alors... #}
+
     {% if prod|length == 0 %}
-    <p class="bg-indigo-600 rounded-3xl text-white text-center p-3 mb-5">Il n'y as aucune ligne dans votre tableau n'hésitez pas à en rajouter en cliquant <a class="text-white hover:text-indigo-100 underline" onclick="location.href='/addProduit/{{ tabs.id }}'">juste ici</a>.</p>
-        <div class="ml-5 underline space-x-1">
-            <button onclick="location.href='/addProduit/{{ tabs.id }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <p class="bg-indigo-600 rounded-3xl text-white text-center p-3 mb-5">Il n'y as aucune ligne dans votre tableau
+            n'hésitez pas à en rajouter en cliquant <a class="text-white hover:text-indigo-100 underline"
+                                                       onclick="location.href='/addProduit/{{ tabs.id }}'">juste ici</a>.
+        </p>
+        <div class="ml-5 space-x-1">
+            <button onclick="location.href='/addProduit/{{ tabs.id }}'"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                 Ajouter ligne
             </button>
+            <button onclick="location.href='/deleteTabs/{{ tabs.id }}'"
+                    class="items-center mt-5 ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Supprimer Tableau
+            </button>
+
+
         </div>
     {% else %}
-    {# Bouton pour ajouter Ligne #}
-    <button onclick="location.href='/addProduit/{{ tabs.id }}'" class="mt-5 ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Ajouter ligne</button>
-
-    <div class="ml-5 space-x-1">
-    <div class="container flex flex-wrap justify-center mx-auto">
-        <div class="flex flex-col">
-            <div class="w-full">
-                <div class="border-b border-gray-200 shadow">
-                    <table class="divide-y divide-gray-300 ">
-                        <thead class="bg-gray-100 underline">
-                        <tr>
-                            {# Donnée #}
-                            <th class="px-10 py-2 text-xs text-gray-500">
-                                Désignation
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Marque
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Reference
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Quantité
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Garantie
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                PrixTTC
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Type de garantie
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Numéro immo
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500 flex-nowrap">
-                                Caratéristiques
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Pack
-                            </th>
-                            <th class="border-l px-10 py-2 text-xs text-gray-500">
-                                Commentaire
-                            </th>
-                            {# Edition/suppression #}
-                            <th class="border-l px-6 py-2 text-xs text-gray-500">
-                                Modifier
-                            </th>
-                            <th class="px-6 py-2 text-xs text-gray-500">
-                                Supprimer
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-300">
-                        {% for produit in prod %}
+        {# Bouton pour ajouter Ligne #}
+        <div class=" mb-5 flex bg-blue-900 text-center py-4 rounded-lg">
+            <button onclick="location.href='/addProduit/{{ tabs.id }}'"
+                    class="items-center mt-5 ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Ajouter
+                ligne
+            </button>
+            <button onclick="location.href='/deleteTabs/{{ tabs.id }}'"
+                    class="items-center mt-5 ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Supprimer Tableau
+            </button>
+            <p class="items-center mt-5 ml-5 bg-indigo-600 rounded-3xl text-white text-center py-2 px-4 right">Vous êtes sur le
+                tableau : {{ tabs.libelle }}</p>
+        </div>
+        <div class="ml-5 mt-5 mr-5 overflow-x-auto h-auto">
+            <div class=" border-t border-l border-r shadow">
+                <table class=" overflow-y-auto">
+                    <tr>
+                        {# Donnée #}
+                        <th class="px-10 py-2 text-xs text-gray-500">
+                            Désignation
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Marque
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Référence
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Quantité
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Garantie
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            PrixTTC
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Type de garantie
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Numéro immo
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Caratéristiques
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Pack
+                        </th>
+                        <th class="border-l px-10 py-2 text-xs text-gray-500">
+                            Commentaire
+                        </th>
+                        {# Edition/suppression #}
+                        <th class="border-l px-6 py-2 text-xs text-gray-500">
+                            Modifier
+                        </th>
+                        <th class="border-l px-6 py-2 text-xs text-gray-500">
+                            Supprimer
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-300">
+                    {% for produit in prod %}
                         <tr class="whitespace-nowrap">
                             <td class="px-6 py-4 text-sm text-gray-900">
                                 {{ produit.designation }}
@@ -82,11 +97,12 @@
                                 {{ produit.quantite }}
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-900">
+
                                 {% if produit.garantie == true %}
                                     <p>✔</p>
                                 {% else %}
                                     <p>❌</p>
-                                    {% endif %}
+                                {% endif %}
 
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-900">
@@ -112,20 +128,20 @@
                                 {{ produit.commentaire }}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#" class="px-4 py-1 text-sm text-blue-600 bg-blue-200 rounded-full">📝</a>
+                                <a href="/updateProduit/{{ produit.id }}"
+                                   class="px-4 py-1 text-sm text-blue-600 bg-blue-200 rounded-full">📝</a>
                             </td>
                             <td class="px-6 py-4">
-                                <a href="/deleteProduit/{{ tabs.id }}/{{ produit.id }}" class="px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">🗑️</a>
+                                <a href="/deleteProduit/{{ tabs.id }}/{{ produit.id }}"
+                                   class="px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">🗑️</a>
                             </td>
                         </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
-    </div> {# Tableau #}
+        {# Tableau #}
     {% endif %}
 
     </body>
