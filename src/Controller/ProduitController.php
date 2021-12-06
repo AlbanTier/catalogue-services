@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Form\ProduitType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\FormTypeInterface;
 
 class ProduitController extends AbstractController
 {
@@ -71,6 +73,24 @@ class ProduitController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('app_tabs_show', ['id' => $idTabs]);
+    }
+
+    /**
+     * @Route ("/updateProduit/{id}", name="app_update_produit")
+     */
+    public function update(EntityManagerInterface $em, $id, Request $request)
+    {
+        $produit = $em->getRepository('App\Entity\Produit');
+        $produit = $produit->find($id);
+        $form = $this->createForm(ProduitType::class, $produit);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em->flush();
+            $repo = $em->getRepository('App\Entity\Tabs');
+            $produit = $repo->findAll();
+        }
+        return $this->render('produit/edit.html.twig',  ['form' =>$form->createView()]);
     }
 
 

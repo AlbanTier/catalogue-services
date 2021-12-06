@@ -18,7 +18,7 @@ class Tabs
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $libelle;
 
@@ -26,6 +26,11 @@ class Tabs
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $idUserCreate;
 
     public function getId(): ?int
     {
@@ -52,6 +57,18 @@ class Tabs
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getIdUserCreate(): ?string
+    {
+        return $this->idUserCreate;
+    }
+
+    public function setIdUserCreate(string $idUserCreate): self
+    {
+        $this->idUserCreate = $idUserCreate;
 
         return $this;
     }
