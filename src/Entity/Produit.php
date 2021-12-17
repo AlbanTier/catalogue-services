@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Produit
 {
+    //la classe produit doit etre modifier afin de pouvoir y rajouter un ManyToOne ou bien encore un OneToMany
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -26,6 +27,7 @@ class Produit
      * @ORM\Column(type="string", length=255)
      */
     private $marque;
+
 
     /**
      * @ORM\Column(type="integer")

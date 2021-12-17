@@ -13,15 +13,7 @@ use Symfony\Component\Form\FormTypeInterface;
 
 class ProduitController extends AbstractController
 {
-    /**
-     * @Route("/produit", name="produit")
-     */
-    public function index(): Response
-    {
-        return $this->render('produit/index.html.twig', [
-            'controller_name' => 'ProduitController',
-        ]);
-    }
+
 
     /**
      * @Route ("/addProduit/{id}", name="app_new_produit")
@@ -55,8 +47,7 @@ class ProduitController extends AbstractController
             $produit->setIdTabs($idR);
             $em->persist($produit);
             $em->flush();
-            $repo = $em->getRepository('App\Entity\Tabs');
-            $produit = $repo->findAll();
+            return $this->redirectToRoute('app_tabs_show', ['id' => $idR]);
         }
 
         return $this->render('produit/form.produit.html.twig', ['form' => $form->createView()]);

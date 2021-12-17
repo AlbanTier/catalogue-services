@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,11 +22,11 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/users", name="app_users_admin")
      */
-    public function gestionUsers(): Response
+    public function gestionUsers(EntityManagerInterface $em): Response
     {
-        return $this->render('admin/users.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        $user = $em->getRepository('App\Entity\User');
+        $user = $user->findAll();
+        return $this->render('admin/users.html.twig', compact('user'));
     }
 
     /**

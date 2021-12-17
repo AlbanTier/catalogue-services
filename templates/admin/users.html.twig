@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion utilisateurs | Colabo{% endblock %}
+{% block title %}Gestion utilisateurs | Colaboration{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
 
-    <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ 'C:/Users/adamet/project/tableauColabo/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-            <li>Your template at <code><a href="{{ 'C:/Users/adamet/project/tableauColabo/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-        </ul>
+    <div class="ml-5 mt-5 mr-5 w-max justify-center">
+        <div class="flex border-t border-l border-r shadow">
+            <table>
+                <tr>
+                    <th class="px-10 py-2 text-xs text-gray-500">
+                        Nom
+                    </th>
+                    <th class="px-10 py-2 text-xs text-gray-500">
+                        Prenom
+                    </th>
+                    <th class="px-10 py-2 text-xs text-gray-500">
+                        Identifiant
+                    </th>
+
+                </tr>
+                <tbody class="bg-white divide-y divide-gray-300">
+                {% for user in user %}
+                    <tr class="whitespace-nowrap">
+                        <td class="px-6 py-4 text-sm text-gray-900">
+                            {{ user.nom }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900">
+                            {{ user.prenom }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900">
+                            {{ user.username }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

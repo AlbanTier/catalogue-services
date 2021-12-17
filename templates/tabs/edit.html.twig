@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Création tableau | Colaboration{% endblock %}
+{% block body %}
+    <body>
+    <div class="justify-center flex items-center bg-blue-500 shadow-lg rounded-lg">
+        <div class=" bg-white rounded shadow-2xl p-5 m-4 flex-wrap ">
+            {{ form_start(form) }}
+            {# Première ligne #}
+            <div class="flex justify-between mb-2">
+                <div class="w-full px-3 mb-6 md:mb-0">
+                    {{ form_row(form.libelle, {
+                        label_class: 'mb-2 font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    }) }}
+                </div>
+                <div class="px-3 mb-6 md:mb-0">
+                    {{ form_row(form.description, {
+                        label_class: 'mb-2 font-bold text-lg text-gray-900 underline',
+                        widget_class: 'mt-2 flex border rounded-lg border-gray-200 bg-gray-50 p-2 w-max',
+                    }) }}
+                </div>
+            </div>
+            <input type="submit" value="Envoyer">
+            {{ form_end(form) }}
+        </div>
+    </div>
+    </body>
+{% endblock %}

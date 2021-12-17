@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Tabs;
-use App\Entity\User;
+use App\Form\TabsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -35,23 +36,29 @@ class TabsController extends AbstractController
 
     }
 
-    //Fonction SHOW
+    /**
+     * @Route("/test", name="app_test_show")
+     */
+    public function test(): Response
+    {
+        return $this->render('produit/test.html.twig');
+    }
+
+
+    //READ
 
     /**
      * @Route("/tabs/{id}", name="app_tabs_show")
      */
-    public function show(Tabs $tabs, EntityManagerInterface $em, Request $request): Response
+    public function show(Tabs $tabs, EntityManagerInterface $em, Request $request, $id): Response
     {
-        //récupération de l'id contenu dans "_route_params"
-        $id = $request->get('_route_params'); //récuperation du paramètre route qui contient l'id du tableau
-        foreach ($id as $value) //Boucle pour la Récupération de la valeur du paramètre
-            $idR = $value;
         $repoProduit = $em->getRepository('App\Entity\Produit');
-        $prod = $repoProduit->findby(array('idTabs' => $idR)); //recherche de tout les produit ayant comme iD le tableau recherché
+        $prod = $repoProduit->findby(array('idTabs' => $id)); //recherche de tout les produit ayant comme iD le tableau recherché
+
         return $this->render('produit/show.html.twig', compact('tabs', 'prod'));
     }
 
-    //Fonction pour la création des tableau
+    //CREATE
 
     /**
      * @Route ("/createTabs", name="app_new_tabs")
@@ -63,6 +70,12 @@ class TabsController extends AbstractController
         $form = $this->createFormBuilder($tabs) //Création du formulaire correspondant à l'entité tabs
         ->add('libelle', null, ['attr' => ['autofocus' => true]])
             ->add('description')
+            ->add('typeTabs', ChoiceType::class, [
+                'choices'  => [
+                    'Gestion de stock' => 'stock',
+                    'Gestion de tâches' => 'taches',
+                ],
+            ])
             ->getForm();
         //Récupération des saisie
         $form->handleRequest($request);
@@ -83,7 +96,7 @@ class TabsController extends AbstractController
         return $this->render('tabs/create.html.twig', ['form' => $form->createView()]);
     }
 
-
+    //DELETE
     /**
      * @Route ("/deleteTabs/{idTabs}", name="app_delete_tabs")
      */
@@ -98,5 +111,20 @@ class TabsController extends AbstractController
         return $this->redirectToRoute('app_tabs', ['id' => $idTabs]);
     }
 
+    //UPDATE
+    /**
+     * @Route ("/updateTabs/{idTabs}", name="app_update_tabs")
+     */
+    public function update(EntityManagerInterface $em, $idTabs, Request $request)
+    {
+        $tabs = $em->getRepository('App\Entity\Tabs');
+        $tabs = $tabs->find($idTabs);
+        $form = $this->createForm(TabsType::class, $tabs);
+        $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid()){
+            $em->flush();
+        }
+        return $this->render('tabs/edit.html.twig',  ['form' =>$form->createView()]);
+    }
 }
