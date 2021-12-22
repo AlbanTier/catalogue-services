@@ -6,33 +6,34 @@
     {# Si il n'y as pas de ligne dans le tableau alors... #}
 
     {% if prod|length == 0 %}
-        <p class="bg-indigo-600 rounded-3xl text-white text-center p-3 mb-5">Il n'y as aucune ligne dans votre tableau
-            n'hésitez pas à en rajouter en cliquant <a class="text-white hover:text-indigo-100 underline"
-                                                       onclick="location.href='/addProduit/{{ tabs.id }}'">juste ici</a>.
+        <p class="bg-indigo-600 rounded-3xl text-white text-center p-3 mb-3 ml-5 mr-5">Il n'y as aucune ligne dans votre
+            tableau n'hésitez pas à en rajouter en cliquant
+            <a class="text-white hover:text-indigo-100 underline"
+               onclick="location.href='/addProduit/{{ tabs.id }}'">juste ici
+            </a>.
         </p>
         <div class="ml-5 space-x-1">
             <button onclick="location.href='/addProduit/{{ tabs.id }}'"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full">
                 Ajouter ligne
             </button>
             <button onclick="location.href='/deleteTabs/{{ tabs.id }}'"
-                    class="items-center mt-5 ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Supprimer Tableau
+                    class="items-center ml-5 bg-red-500 text-white py-2 px-4 rounded-full">Supprimer Tableau
             </button>
-
-
         </div>
     {% else %}
         {# Bouton pour ajouter Ligne #}
         <div class="items-center flex bg-blue-900 text-center p-5 rounded-lg">
             <button onclick="location.href='/addProduit/{{ tabs.id }}'"
-                    class="items-center  ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Ajouter
-                ligne
+                    class="items-center  ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Ajouter ligne
             </button>
             <button onclick="location.href='/deleteTabs/{{ tabs.id }}'"
-                    class=" ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Supprimer Tableau
+                    class=" ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                Supprimer Tableau
             </button>
-            <p class="ml-5 bg-indigo-600 rounded-3xl text-white text-center py-2 px-4 right">Vous êtes sur le
-                tableau : {{ tabs.libelle }}</p>
+            <p class="ml-5 bg-indigo-600 rounded-3xl text-white text-center py-2 px-4 right">
+                Vous êtes sur le tableau : {{ tabs.libelle }}</p>
         </div>
         <div class="ml-5 mt-5 mr-5 overflow-x-auto h-auto">
             <div class=" border-t border-l border-r shadow">

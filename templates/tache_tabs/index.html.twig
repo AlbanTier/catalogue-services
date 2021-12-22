@@ -3,59 +3,76 @@
 {% block title %}Tableau des tâches | Colaboration{% endblock %}
 
 {% block body %}
-    <div class="items-center flex bg-blue-900 text-center p-5 rounded-lg">
-        <button onclick="location.href='/tache/create/{{ tabs.id }}'"
-                class="items-center ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-            Ajouter
-            tâches
-        </button>
-        <button {# onclick="location.href='/deleteTabs/{{ tabs.id }} #}
-                class=" ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Supprimer Tableau
-        </button>
-        <p class="ml-5 bg-indigo-600 rounded-3xl text-white text-center py-2 px-4 right">Vous êtes sur le
-            tableau : {{ tabs.libelle }}</p>
-    </div>
-    <div class="ml-5 mt-5 mr-5 overflow-x-auto h-auto justify-center flex">
-        <div class=" border-l shadow flex">
-            <table class=" overflow-y-auto ">
-                <tr>
-                    <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
-                        Nom de la tâches
-                    </th>
-                    <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
-                        Description
-                    </th>
-                    <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
-                        Avancement de la tâche
-                    </th>
-                    <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
-                        Date limite
-                    </th>
-                    <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
-                        Attribuer à
-                    </th>
-                </tr>
-                <tbody class="bg-white divide-y divide-gray-300">
-                {% for tache in taches %}
-                    <tr class="whitespace-nowrap">
-                        <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
-                            {{ tache.nomTache }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
-                            {{ tache.descriptionTache }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
-                            {{ tache.avancementTache }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
-                            {{ tache.limiteDateTache|date('d-m-Y') }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
-                            {{ tache.attributionTache }}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+    {% if tabs|length() == 0 %}
+        <div class="bg-indigo-600 text-center py-3 lg:px-4 rounded-3xl">
+            <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
+                 role="alert">
+                <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">New</span>
+                <button onclick="location.href='{{ path('app_new_tabs') }}'"
+                        class="font-semibold mr-2 text-left flex-auto">Il n'existe pour le moment aucun tableau,
+                    n'hésiter pas à en créer un!
+                </button>
+                <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/>
+                </svg>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div class="items-center flex bg-blue-900 text-center p-5 rounded-lg">
+            <button onclick="location.href='/tache/create/{{ tabs.id }}'"
+                    class="items-center ml-5 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full">
+                Ajouter
+                tâches
+            </button>
+            <button {# onclick="location.href='/deleteTabs/{{ tabs.id }} #}
+                    class=" ml-5 bg-red-500 hover:bg-red-700 text-white  py-2 px-4 rounded-full">Supprimer
+                Tableau
+            </button>
+            <p class="ml-5 bg-indigo-600 rounded-3xl text-white text-center py-2 px-4 right">Vous êtes sur le
+                tableau : {{ tabs.libelle }}</p>
+        </div>
+        <div class="ml-5 mt-5 mr-5 overflow-x-auto h-auto justify-center flex">
+            <div class=" border-l shadow flex">
+                <table class=" overflow-y-auto ">
+                    <tr>
+                        <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
+                            Nom de la tâches
+                        </th>
+                        <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
+                            Description
+                        </th>
+                        <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
+                            Avancement de la tâche
+                        </th>
+                        <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
+                            Date limite
+                        </th>
+                        <th class="px-10 py-2 text-xs text-gray-500 border-t border-r border-b">
+                            Attribuer à
+                        </th>
+                    </tr>
+                    <tbody class="bg-white divide-y divide-gray-300">
+                    {% for tache in taches %}
+                        <tr class="whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
+                                {{ tache.nomTache }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
+                                {{ tache.descriptionTache }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
+                                {{ tache.avancementTache }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
+                                {{ tache.limiteDateTache|date('d-m-Y') }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 border-r border-b">
+                                {{ tache.attributionTache }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
