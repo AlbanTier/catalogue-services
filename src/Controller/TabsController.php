@@ -83,14 +83,19 @@ class TabsController extends AbstractController
         //Si le form est envoyé et valide alors on envoie en base de donnée et on affiche la vue des tableau
         if ($form->isSubmitted() && $form->isValid()) {
             $session = new Session;
-            $nom = $session->get('_security.last_username');//Récupération de la variable session qui contient l'username
-            $tabs->setIdUserCreate($nom); //Utilisation du setteur afin de mettre l'username avec le tableau
-            $em->persist($tabs); //Utilisation du EntityManager afin de persister le $tabs
-            $em->flush(); //Flush sers à envoyer en base de donnée
+            if ($session->get('_security.last_username') == null) {
+                return $this->render('tabs/warning.html.twig');
+            }
+            else {
+                $nom = $session->get('_security.last_username');//Récupération de la variable session qui contient l'username
+                $tabs->setIdUserCreate($nom); //Utilisation du setteur afin de mettre l'username avec le tableau
+                $em->persist($tabs); //Utilisation du EntityManager afin de persister le $tabs
+                $em->flush(); //Flush sers à envoyer en base de donnée
 
-            $repo = $em->getRepository('App\Entity\Tabs');
-            $tabs = $repo->findBy(['idUserCreate' => $nom]);
-            return $this->render('tabs/index.html.twig', ['tabs' => $tabs]);
+                $repo = $em->getRepository('App\Entity\Tabs');
+                $tabs = $repo->findBy(['idUserCreate' => $nom]);
+                return $this->render('tabs/index.html.twig', ['tabs' => $tabs]);
+            }
         }
         //Sinon on renvoie à la création du formulaire
         return $this->render('tabs/create.html.twig', ['form' => $form->createView()]);
